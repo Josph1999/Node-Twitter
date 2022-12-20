@@ -1,13 +1,16 @@
 const { getFirstPage, getTwitter, getCurrentProfile } = require('./Controllers/Twitter')
 const passport = require('passport')
 const Strategy = require('passport-twitter').Strategy
+const dotenv = require('dotenv')
+
+dotenv.config()
 
 passport.use(
   new Strategy(
     {
-      consumerKey: 'yV34MsRaX9DRCsjVwSlNLVTsI',
-      consumerSecret: 'dGCVUxzE66KLxTjFIRSnqFbcjW1TV1p6WC52cqrgKpXSRp4itn',
-      callbackURL: 'http://localhost:8080/twitter'
+      consumerKey: process.env.API_KEY,
+      consumerSecret: process.env.API_SECRET,
+      callbackURL: process.env.CALLBACK_URL
     },
     (token, tokenSecret, profile, callback) => {
       return callback(null, profile)
